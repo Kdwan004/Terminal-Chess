@@ -1,20 +1,9 @@
 public class game {
 
-    private static final int BOARD_SIZE = 9;
-    private static final String EMPTY_CORNER = "   ";
-    private static final String EMPTY_SQUARE = "|<>|";
-    private static final String WHITE_PAWN = "|+P|";
-    private static final String BLACK_PAWN = "|-P|";
-    private static final String WHITE_KING = "|+K|";
-    private static final String BLACK_KING = "|-K|";
-    private static final String WHITE_QUEEN = "|+Q|";
-    private static final String BLACK_QUEEN = "|-Q|";
-    private static final String WHITE_ROOK = "|+R|";
-    private static final String BLACK_ROOK = "|-R|";
-    private static final String WHITE_BISHOP = "|+B|";
-    private static final String BLACK_BISHOP = "|-B|";
-    private static final String WHITE_KNIGHT = "|+H|";
-    private static final String BLACK_KNIGHT = "|-H|";
+    public static final int BOARD_SIZE = 9;
+    public static final String EMPTY_CORNER = "    ";
+    public static final String EMPTY_SQUARE = "|<>|";
+    public static final String EMPTY_SQUARE2 = "|><|";
 
     public static String[][] initializeBoard() {
         // Initialize board dimensions
@@ -24,6 +13,7 @@ public class game {
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int column = 0; column < BOARD_SIZE; column++) {
                 // Make the top-left corner empty
+
                 if (row == 0 && column == 0) {
                     board[row][column] = EMPTY_CORNER;
                 }
@@ -33,6 +23,10 @@ public class game {
                 } else if (column == 0) {
                     board[row][column] = " y" + row + " ";
                 }
+                else if ((row % 2 == 0 && column % 2 == 0) || (row % 2 != 0 && column % 2 != 0)) {
+                    board[row][column] = EMPTY_SQUARE2;
+                }
+
                 // Print empty squares
                 else {
                     board[row][column] = EMPTY_SQUARE;
@@ -42,40 +36,9 @@ public class game {
         return board;
     }
 
-    public static void setupPieces(String[][] board) {
-        // Set pawns
-        for (int column = 1; column < BOARD_SIZE; column++) {
-            board[2][column] = BLACK_PAWN;
-            board[7][column] = WHITE_PAWN;
-        }
-        // Set Kings
-        board[1][5] = BLACK_KING;
-        board[8][5] = WHITE_KING;
-        // Set Queens
-        board[1][4] = BLACK_QUEEN;
-        board[8][4] = WHITE_QUEEN;
-        // Set Bishops
-        board[1][6] = BLACK_BISHOP;
-        board[1][3] = BLACK_BISHOP;
-        board[8][6] = WHITE_BISHOP;
-        board[8][3] = WHITE_BISHOP;
-        // Set Knights
-        board[1][7] = BLACK_KNIGHT;
-        board[1][2] = BLACK_KNIGHT;
-        board[8][7] = WHITE_KNIGHT;
-        board[8][2] = WHITE_KNIGHT;
-        // Set Rooks
-        board[1][8] = BLACK_ROOK;
-        board[1][1] = BLACK_ROOK;
-        board[8][8] = WHITE_ROOK;
-        board[8][1] = WHITE_ROOK;
-
-        
-    }
-
     public static String[][] generateBoard() {
         String[][] board = initializeBoard();
-        setupPieces(board);
+        square.setupPieces(board);
         return board;
     }
 
@@ -92,6 +55,14 @@ public class game {
         System.out.print("\033[H\033[2J"); 
 
         String[][] board = generateBoard();
+        //displayBoard(board);
+
+        //move.pawn(board, 7, 5, 2);
+        // move.pawn(board, 7, 4, 2);
+        displayBoard(board);
+
+        // move.king(board, 8, 5, 7, 5);
+        // move.queen(board, 8, 4, 7, 4);
         displayBoard(board);
     }
 }
