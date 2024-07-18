@@ -3,7 +3,6 @@ public class peiceMove {
     //    0     1     2     3     4     5
     // {"|K|","|Q|","|R|","|B|","|/|","|P|"}};
 
-    static String[][] PEICE_LIST = peicesSet.PEICE;
     static String[] WHITE = peicesSet.WHITE_PEICE;
     static String[] BLACK = peicesSet.BLACK_PEICE;
 
