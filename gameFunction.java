@@ -8,16 +8,19 @@ public class gameFunction {
     static String empty2 = gameBoard.EMPTY_SQUARE[2];
 
 
-    public static void listMoves(int[][] moves, int fromRow, int fromColumn) {
+    public static String selectedPeice(String[][] board, int fromRow, int fromColumn) {
         
-        for(int[] move: moves) {
-            int newRow = fromRow + move[0];
-            int newColumn = fromColumn + move[1];
-            
-            System.out.print(newRow+", "+newColumn+" ");
+        String from = board[fromRow][fromColumn];
 
+        for(String[] set:peicesSet.PEICE) {
+            for(String peices:set) {
+                if(peices == from) {
+                    return peices;
+                }
+            }
         }
-    
+        return null;
+
     }
     
     public static void move(String[][] board, int[][] moves, int fromRow, int fromColumn, int toRow, int toColumn) {
@@ -41,42 +44,43 @@ public class gameFunction {
         // Check sign of peice to and from
         String fromSign = board[fromRow][fromColumn].substring(1,2);
         String toSign = board[toRow][toColumn].substring(1,2);
+        String captured = board[toRow][toColumn].substring(1,3);
         
-        for(int[] move: moves) {
-            int newRow = fromRow + move[0];
-            int newColumn = fromColumn + move[1];
-
-            if((newRow == toRow && newColumn == toColumn) && (toRow!=0 && toColumn!=0)) { // Checked if possible
-                if(board[toRow][toColumn] == empty1 || board[toRow][toColumn] == empty2) { // Check if square to go too is empty
-                    board[toRow][toColumn] = board[fromRow][fromColumn]; // Set square going too, to square coming form
-                    board[fromRow][fromColumn] =  (fromRow%2!=0||fromColumn%2!=0) && 
-                            (fromRow%2==0||fromColumn%2==0) // replace square going form with correct empty square        
-                            ?empty1:empty2; 
-                    return;
-                }
+                for(int[] move: moves) {
+                    int newRow = fromRow + move[0];
+                    int newColumn = fromColumn + move[1];
                 
-                else if((fromSign.equals("+")) && (toSign.equals("-"))) { // Check if the sign of the square to go too is -
-                    CAPTURES_WHITE.add(board[toRow][toColumn]);
-                    board[toRow][toColumn] = board[fromRow][fromColumn];
-                    board[fromRow][fromColumn] =  (fromRow%2!=0||fromColumn%2!=0) && 
-                            (fromRow%2==0||fromColumn%2==0) // replace square going form with correct empty square        
-                            ?empty1:empty2; 
-                    return;
+                    if((newRow == toRow && newColumn == toColumn) && (toRow!=0 && toColumn!=0)) { // Checked if possible
+                        if(board[toRow][toColumn] == empty1 || board[toRow][toColumn] == empty2) { // Check if square to go too is empty
+                            board[toRow][toColumn] = board[fromRow][fromColumn]; // Set square going too, to square coming form
+                            board[fromRow][fromColumn] =  (fromRow%2!=0||fromColumn%2!=0) && 
+                                    (fromRow%2==0||fromColumn%2==0) // replace square going form with correct empty square        
+                                    ?empty1:empty2; 
+                            return;
+                        }
 
+                        else if((fromSign.equals("+")) && (toSign.equals("-"))) { // Check if the sign of the square to go too is -
+                            CAPTURES_WHITE.add(captured);
+                            board[toRow][toColumn] = board[fromRow][fromColumn];
+                            board[fromRow][fromColumn] =  (fromRow%2!=0||fromColumn%2!=0) && 
+                                    (fromRow%2==0||fromColumn%2==0) // replace square going form with correct empty square        
+                                    ?empty1:empty2; 
+                            return;
+                        
+                        }
+                    
+                        else if((fromSign.equals("-")) && (toSign.equals("+"))) { // Check if the sign of the square to go too is -
+                            CAPTURES_BLACK.add(captured);
+                            board[toRow][toColumn] = board[fromRow][fromColumn];
+                            board[fromRow][fromColumn] =  (fromRow%2!=0||fromColumn%2!=0) && 
+                                    (fromRow%2==0||fromColumn%2==0) // replace square going form with correct empty square        
+                                    ?empty1:empty2; 
+                            return;
+                        
+                        }
+                    }
+                
                 }
 
-                else if((fromSign.equals("-")) && (toSign.equals("+"))) { // Check if the sign of the square to go too is -
-                    CAPTURES_BLACK.add(board[toRow][toColumn]);
-                    board[toRow][toColumn] = board[fromRow][fromColumn];
-                    board[fromRow][fromColumn] =  (fromRow%2!=0||fromColumn%2!=0) && 
-                            (fromRow%2==0||fromColumn%2==0) // replace square going form with correct empty square        
-                            ?empty1:empty2; 
-                    return;
-
-                }
-            }
-
-        }
-        
     }
 }
