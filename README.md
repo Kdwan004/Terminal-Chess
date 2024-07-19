@@ -1,6 +1,6 @@
-# Console Chess Game
+# Terminal Chess Game
 
-This is a simple console-based chess game implemented in Java. The game allows two players to take turns moving pieces on a chessboard, with each player entering the coordinates for their moves through the console.
+This is a simple terminal-based chess game implemented in Java. The game allows two players to take turns moving pieces on a chessboard, with each player entering the coordinates for their moves through the terminal.
 
 ## Features
 
