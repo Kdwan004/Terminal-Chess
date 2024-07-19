@@ -51,8 +51,8 @@ public class peicesSet {
         String white = WHITE_PEICE[5];
         String black = BLACK_PEICE[5];
         for(int i = 1; i < board.length; i++) {
-            board[2][i] = white;
-            board[7][i] = black;
+            board[7][i] = white;
+            board[2][i] = black;
         }
     }
 

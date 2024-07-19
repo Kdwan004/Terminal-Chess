@@ -6,7 +6,7 @@ public class peiceMove {
     static String[] WHITE = peicesSet.WHITE_PEICE;
     static String[] BLACK = peicesSet.BLACK_PEICE;
 
-    
+
 
     public static int[][] king() {
         int[][] moves = {
@@ -16,6 +16,7 @@ public class peiceMove {
     };
         return moves;
     }
+
 
     public static int[][] queen(int n) {
         
@@ -67,11 +68,13 @@ public class peiceMove {
         String selectedPeice = gameFunction.selectedPeice(board, fromRow, fromColumn);
         int[][] possibleMoves;
 
+        // King moves
         if (selectedPeice == WHITE[0] || selectedPeice == BLACK[0]) {
             possibleMoves = king();
             gameFunction.move(board, possibleMoves, fromRow, fromColumn, toRow, toColumn);
         }
 
+        // Queen moves
         else if (selectedPeice == WHITE[1] || selectedPeice == BLACK[1]) {
             for(int n = 1; n < 8; n++) {
                 possibleMoves = queen(n);
@@ -79,6 +82,7 @@ public class peiceMove {
             }
         }
         
+        // Rook moves
         else if (selectedPeice == WHITE[2] || selectedPeice == BLACK[2]) {
             for(int n = 1; n < 8; n++) {
                 possibleMoves = rook(n);
@@ -86,6 +90,7 @@ public class peiceMove {
             }
         }
 
+        // Bishop moves
         else if (selectedPeice == WHITE[3] || selectedPeice == BLACK[3]) {
             for(int n = 1; n < 8; n++) {
                 possibleMoves = bishop(n);
@@ -93,14 +98,55 @@ public class peiceMove {
             }
         }
 
+        // Knight moves
         else if (selectedPeice == WHITE[4] || selectedPeice == BLACK[4]) {
                 possibleMoves = knight();
                 gameFunction.move(board, possibleMoves, fromRow, fromColumn, toRow, toColumn);
         }
+        
+        // Pawn moves
+        else if (selectedPeice == WHITE[5] || selectedPeice == BLACK[5]) {
+            
 
-        // else if PAWNS
+            // Get sign of square being attacked
+            String toSign = board[toRow][toColumn].substring(1,2);
+
+            // If pawns first move
+            if(selectedPeice == WHITE[5] && fromRow == 7) {
+                possibleMoves = pawns.firstWhiteMove;
+                gameFunction.move(board, possibleMoves, fromRow, fromColumn, toRow, toColumn);
+            }
+            else if(selectedPeice == BLACK[5] && fromRow == 2) {
+                possibleMoves = pawns.firstBlackMove;
+                gameFunction.move(board, possibleMoves, fromRow, fromColumn, toRow, toColumn);
+            }
+
+            // If pawn can attack
+            else if(selectedPeice == WHITE[5] && (toSign.equals("-"))) {
+                possibleMoves = pawns.whiteAttackMoves;
+                gameFunction.move(board, possibleMoves, fromRow, fromColumn, toRow, toColumn);
+            }
+
+            else if(selectedPeice == BLACK[5] && (toSign.equals("+"))) {
+                possibleMoves = pawns.blackAttackMoves;
+                gameFunction.move(board, possibleMoves, fromRow, fromColumn, toRow, toColumn);
+            }
+
+            // If pawn moves forward second move ++;
+            else if(selectedPeice == WHITE[5]) {
+                possibleMoves = pawns.whiteStandardMove;
+                gameFunction.move(board, possibleMoves, fromRow, fromColumn, toRow, toColumn);
+            }
+
+            else if(selectedPeice == BLACK[5]) {
+                possibleMoves = pawns.blackAttackMoves;
+                gameFunction.move(board, possibleMoves, fromRow, fromColumn, toRow, toColumn);
+            }
 
 
-    
+
+
+
     }
+}
 }
