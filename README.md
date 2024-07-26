@@ -19,13 +19,13 @@ This is a simple terminal-based chess game implemented in Java. The game allows 
 2. Compile the Java files using the following command:
 
     ```sh
-    javac MAIN.java
+    javac Main.java
     ```
 
 3. Run the game using the following command:
 
     ```sh
-    java MAIN
+    java Main
     ```
 
 4. The game will start and display the initial chessboard. Players take turns entering their moves.
@@ -35,11 +35,11 @@ This is a simple terminal-based chess game implemented in Java. The game allows 
 ## Code Structure
 
 - `MAIN.java`: The main class that initializes the game and handles the game loop.
-- `gameBoard.java`: Contains methods for creating and displaying the game board.
-- `gameFunction.java`: Manages the game state, including captured pieces.
-- `peiceMove.java`: Handles the logic for moving pieces on the board.
-- `peiceSet.java`: Initialises peice positions on board.
-- `pawns.java`: Game functions for pawn peice.
+- `GameBoard.java`: Contains methods for creating and displaying the game board.
+- `GameFunction.java`: Manages the game state, including captured pieces.
+- `PieceMove.java`: Handles the logic for moving pieces on the board.
+- `PieceSet.java`: Initialises peice positions on board.
+- `Pawns.java`: Game functions for pawn peice.
 
 ## TODO
 
