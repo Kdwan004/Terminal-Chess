@@ -34,7 +34,7 @@ This is a simple terminal-based chess game implemented in Java. The game allows 
 
 ## Code Structure
 
-- `MAIN.java`: The main class that initializes the game and handles the game loop.
+- `Main.java`: The main class that initializes the game and handles the game loop.
 - `GameBoard.java`: Contains methods for creating and displaying the game board.
 - `GameFunction.java`: Manages the game state, including captured pieces.
 - `PieceMove.java`: Handles the logic for moving pieces on the board.
